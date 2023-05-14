@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { observer } from "mobx-react-lite";
 import Cube from "../Cube/Cube";
 import store from "../../store/store";
@@ -9,7 +9,6 @@ import checkBorderMain from "../../Helpers/checkBorderMain/checkBorderMain";
 const MoveCubesTogether = observer(() => {
   const cubeWrapper = React.useRef();
 
-  //Координаты клика на элементе
   const [shiftClick, setShiftClick] = React.useState({
     shiftX: 0,
     shiftY: 0,
@@ -24,33 +23,34 @@ const MoveCubesTogether = observer(() => {
     });
   }
 
-  function handleDragEnd(event) {
-    const id = Number(event.target.id);
+  const handleDragEnd = useCallback(
+    (event) => {
+      const id = Number(event.target.id);
 
-    const { clientX, clientY } = event;
-    const { shiftX, shiftY } = shiftClick;
+      const { clientX, clientY } = event;
+      const { shiftX, shiftY } = shiftClick;
 
-    const cordX = clientX - shiftX;
-    const cordY = clientY - shiftY;
+      const cordX = clientX - shiftX;
+      const cordY = clientY - shiftY;
 
-    //  Габаритные размеры кубиков
-    const { height, width } = getSizesCubeTogether(cubeWrapper);
+      const { height, width } = getSizesCubeTogether(cubeWrapper);
 
-    const bottomShift = height - store.heightCube;
+      const bottomShift = height - store.heightCube;
 
-    //Проверяем границы общего контейнера
-    const borderCheked = checkBorderMain(
-      store.mainBoxSize,
-      cordX,
-      cordY,
-      width,
-      bottomShift
-    );
+      const borderCheked = checkBorderMain(
+        store.mainBoxSize,
+        cordX,
+        cordY,
+        width,
+        bottomShift
+      );
 
-    if (borderCheked) {
-      store.setCordinateMoveTogether(id, cordX, cordY);
-    }
-  }
+      if (borderCheked) {
+        store.setCordinateMoveTogether(id, cordX, cordY);
+      }
+    },
+    [shiftClick]
+  );
 
   return (
     <section ref={cubeWrapper}>
@@ -63,22 +63,20 @@ const MoveCubesTogether = observer(() => {
           cordDropY,
           boxColor,
           selected,
-        }) => {
-          return (
-            <Cube
-              key={id}
-              id={id}
-              widthBox={widthBox}
-              heightBox={heightBox}
-              moveX={cordDropX}
-              moveY={cordDropY}
-              boxColor={boxColor}
-              handlerClickPosition={handlerClickPosition}
-              handleDragEnd={handleDragEnd}
-              selected={selected}
-            />
-          );
-        }
+        }) => (
+          <Cube
+            key={id}
+            id={id}
+            widthBox={widthBox}
+            heightBox={heightBox}
+            moveX={cordDropX}
+            moveY={cordDropY}
+            boxColor={boxColor}
+            handlerClickPosition={handlerClickPosition}
+            handleDragEnd={handleDragEnd}
+            selected={selected}
+          />
+        )
       )}
     </section>
   );

@@ -50,25 +50,22 @@ const MoveCubeSeparatelyController = observer(
       });
     }
 
-    function handleDragEnd(event) {
-      const mainBoxSize = store.mainBoxSize;
+    const handleDragEnd = React.useCallback(
+      (event) => {
+        const { cordX, cordY } = getCordinateElem(
+          event,
+          store.mainBoxSize,
+          widthBox,
+          shiftClick,
+          position
+        );
 
-      const { cordX, cordY } = getCordinateElem(
-        event,
-        mainBoxSize,
-        widthBox,
-        shiftClick,
-        position
-      );
-
-      setPosition({ x: cordX, y: cordY });
-
-      //Сохраняем первоначальные координаты в стор
-      store.saveCordinateCube(id, cordX, cordY);
-
-      //Проверяем пересечение кубов
-      store.checIntersectsCube(id, cordX, cordY, widthBox, heightBox);
-    }
+        setPosition({ x: cordX, y: cordY });
+        store.saveCordinateCube(id, cordX, cordY);
+        store.checIntersectsCube(id, cordX, cordY, widthBox, heightBox);
+      },
+      [id, widthBox, heightBox, position, shiftClick]
+    );
 
     return (
       <div>
