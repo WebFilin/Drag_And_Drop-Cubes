@@ -14,7 +14,7 @@ class Store {
       id: 1,
       widthBox: this.widthCube,
       heightBox: this.heightCube,
-      startShiftX: 200,
+      startShiftX: 800,
       startShiftY: 200,
       cordDropX: 0,
       cordDropY: 0,
@@ -26,7 +26,7 @@ class Store {
       id: 2,
       widthBox: this.widthCube,
       heightBox: this.heightCube,
-      startShiftX: 400,
+      startShiftX: 700,
       startShiftY: 500,
       cordDropX: 0,
       cordDropY: 0,
@@ -45,10 +45,10 @@ class Store {
   // Разделяем соедененные кубики, возврашаем на стартовые позиции
   splitIntersectedCubes() {
     if (this.isIntersect) {
-      this.arrCubes[0].cordDropX = 200;
+      this.arrCubes[0].cordDropX = 800;
       this.arrCubes[0].cordDropY = 200;
 
-      this.arrCubes[1].cordDropX = 400;
+      this.arrCubes[1].cordDropX = 700;
       this.arrCubes[1].cordDropY = 500;
     }
 
