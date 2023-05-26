@@ -38,8 +38,20 @@ class Store {
   mainBoxSize = { left: 0, top: 0, width: 0, height: 0 };
   isIntersect = false;
 
+  eventDragStart = null;
+  eventDragEnd = null;
+
   constructor() {
     makeAutoObservable(this);
+  }
+
+  //   Получаем события клика при начале и окнчании перемещения
+  getClickPosition(event) {
+    this.eventDragStart = event;
+  }
+
+  getEventDragEnd(event) {
+    this.eventDragEnd = event;
   }
 
   // Разделяем соедененные кубики, возврашаем на стартовые позиции

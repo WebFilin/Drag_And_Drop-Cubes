@@ -63,7 +63,7 @@ const MoveCubeSeparatelyController = observer(
     );
 
     return (
-      <div>
+      <>
         <Cube
           id={id}
           widthBox={widthBox}
@@ -77,7 +77,7 @@ const MoveCubeSeparatelyController = observer(
           dragEnd={handleDragEnd}
           selected={selected}
         />
-      </div>
+      </>
     );
   }
 );
