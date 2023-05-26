@@ -6,9 +6,10 @@ export default function GetCordinateElem(
   mainBoxSize,
   widthBox,
   shiftClick,
-  position
+  cordDropX,
+  cordDropY
 ) {
-  const cordinate = { cordX: position.x, cordY: position.y };
+  const cordinate = { cordX: cordDropX, cordY: cordDropY };
   const { clientX, clientY } = event;
   const { shiftX, shiftY } = shiftClick;
   const cordX = clientX - shiftX;

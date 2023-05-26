@@ -14,10 +14,9 @@ const MoveCubeSeparatelyController = observer(
     heightBox,
     boxColor,
     selected,
+    cordDropX,
+    cordDropY,
   }) => {
-    // Позиция элемента
-    const [position, setPosition] = React.useState({ x: 0, y: 0 });
-
     //Координаты клика на элементе
     const [shiftClick, setShiftClick] = React.useState({
       shiftX: 0,
@@ -30,11 +29,6 @@ const MoveCubeSeparatelyController = observer(
 
       const cordX = left + startShiftX;
       const cordY = top + startShiftY;
-
-      setPosition({
-        x: cordX,
-        y: cordY,
-      });
 
       //  Сохраняем первоначальные координаты в стор
       store.saveCordinateCube(id, cordX, cordY);
@@ -57,14 +51,14 @@ const MoveCubeSeparatelyController = observer(
           store.mainBoxSize,
           widthBox,
           shiftClick,
-          position
+          cordDropX,
+          cordDropY
         );
 
-        setPosition({ x: cordX, y: cordY });
         store.saveCordinateCube(id, cordX, cordY);
         store.checIntersectsCube(id, cordX, cordY, widthBox, heightBox);
       },
-      [id, widthBox, heightBox, position, shiftClick]
+      [id, widthBox, heightBox, cordDropX, cordDropY, shiftClick]
     );
 
     return (
@@ -75,8 +69,8 @@ const MoveCubeSeparatelyController = observer(
           heightBox={heightBox}
           startShiftX={startShiftX}
           startShiftY={startShiftY}
-          moveX={position.x}
-          moveY={position.y}
+          moveX={cordDropX}
+          moveY={cordDropY}
           boxColor={boxColor}
           handlerClickPosition={handlerClickPosition}
           handleDragEnd={handleDragEnd}

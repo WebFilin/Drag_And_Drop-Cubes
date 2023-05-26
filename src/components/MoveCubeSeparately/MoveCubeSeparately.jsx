@@ -14,6 +14,8 @@ const MoveCubeSeparately = observer(() => {
           startShiftY,
           boxColor,
           selected,
+          cordDropX,
+          cordDropY,
         }) => {
           return (
             <MoveCubeSeparatelyController
@@ -23,6 +25,8 @@ const MoveCubeSeparately = observer(() => {
               heightBox={heightBox}
               startShiftX={startShiftX}
               startShiftY={startShiftY}
+              cordDropX={cordDropX}
+              cordDropY={cordDropY}
               boxColor={boxColor}
               selected={selected}
             />
