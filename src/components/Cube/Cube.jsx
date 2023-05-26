@@ -10,7 +10,7 @@ const Cube = observer(
     boxColor,
     moveX,
     moveY,
-    handleDragEnd,
+    dragEnd,
     handlerClickPosition,
     selected,
   }) => {
@@ -34,13 +34,21 @@ const Cube = observer(
       store.selectedCube(id);
     }
 
+    function handlerDragStart(event) {
+      handlerClickPosition(event);
+    }
+
+    function handlerDragEnd(event) {
+      dragEnd(event);
+    }
+
     return (
       <div
         id={id}
         data-elem="cube"
         draggable
-        onDragEnd={handleDragEnd}
-        onMouseDown={handlerClickPosition}
+        onDragStart={handlerDragStart}
+        onDragEnd={handlerDragEnd}
         onClick={handlerClick}
         style={styles}
       ></div>

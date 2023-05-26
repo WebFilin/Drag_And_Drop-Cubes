@@ -73,7 +73,7 @@ const MoveCubesTogether = observer(() => {
             moveY={cordDropY}
             boxColor={boxColor}
             handlerClickPosition={handlerClickPosition}
-            handleDragEnd={handleDragEnd}
+            dragEnd={handleDragEnd}
             selected={selected}
           />
         )

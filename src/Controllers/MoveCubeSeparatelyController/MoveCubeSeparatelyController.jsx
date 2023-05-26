@@ -42,6 +42,7 @@ const MoveCubeSeparatelyController = observer(
         shiftX: shiftX,
         shiftY: shiftY,
       });
+      return false;
     }
 
     const handleDragEnd = React.useCallback(
@@ -73,7 +74,7 @@ const MoveCubeSeparatelyController = observer(
           moveY={cordDropY}
           boxColor={boxColor}
           handlerClickPosition={handlerClickPosition}
-          handleDragEnd={handleDragEnd}
+          dragEnd={handleDragEnd}
           selected={selected}
         />
       </div>
